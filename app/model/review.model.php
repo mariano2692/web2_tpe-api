@@ -11,6 +11,10 @@ class ReviewModel extends Model {
         $resenias = $query->fetchAll(PDO::FETCH_OBJ);
         return $resenias;
     }
+
+    public function getReviewByUser(){
+        
+    }
    
 }
 
