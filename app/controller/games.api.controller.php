@@ -1,18 +1,21 @@
 <?php
 require_once './app/model/games.model.php';
 require_once './app/model/companies.model.php';
+require_once './app/model/review.model.php';
 require_once './app/view/json.view.php';
 require_once './libs/jwt.php';
 
     class GamesApiController {
         private $gamesModel;
         private $companiesModel;
+        private $reviewModel;
         private $view;
         private $auth;
 
         public function __construct(){
             $this->gamesModel = new gamesModel();
             $this->companiesModel = new CompaniesModel();
+            $this->reviewModel = new ReviewModel();
             $this->view = new JSONView();
             $this->auth = new AuthJWT();
         }
@@ -64,6 +67,8 @@ require_once './libs/jwt.php';
         
                 //AGREGO LAS DATOS DE LA COMPANIA QUE LE CORRESPONDE A CADA JUEGO
                 $game->compania = $this->companiesModel->getCompania($game->id_compania);
+                //ARRAY DE COMENTARIOS QUE CORRESPONDEN A CADA JUEGO
+                $game->resenias = $this->reviewModel->getReviewByGame($game->id_juegos);
             }
 
             return $this->view->response($games);
