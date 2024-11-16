@@ -84,7 +84,7 @@ GET <BaseUrl>/api/juegos
 
 **ejemplo de ordenamiento
 
-GET <BaseUrl>/api/juegos?orderBy=nombre
+**GET <BaseUrl>/api/juegos?orderBy=nombre**
 
 - **Filtro:**
  - `filterBy` : Campo por el que se desea filtrar los resultados. Los campos válidos incluyen:
@@ -93,7 +93,7 @@ GET <BaseUrl>/api/juegos?orderBy=nombre
     - `preciomenor`: Filtra los juegos cuyo precio sea menor al especificado.
     - `preciomayor`: Filtra los juegos cuyo precio sea mayor al especificado.
     - `preciomenorigual`: Filtra los juegos cuyo precio sea menor o igual al especificado.
-    - `preciomayorigual`: Filtra los juegos cuyo precio sea amyor o igual al especificado.
+    - `preciomayorigual`: Filtra los juegos cuyo precio sea mayor o igual al especificado.
 
 - `filter` : Campo por el que se desea filtrar los resultados.
 
@@ -101,15 +101,15 @@ GET <BaseUrl>/api/juegos?orderBy=nombre
 
 obtener todos los juegos con un precio igual a 59.99
 
-GET <BaseUrl>/api/juegos?filterBy=precioigual&filter=59.99
+**GET <BaseUrl>/api/juegos?filterBy=precioigual&filter=59.99**
 
 obtener todos los juegos con un precio menor o igual a 120.36
 
-GET <BaseUrl>/api/juegos?filterBy=preciomenorigual&filter=120.36
+**GET <BaseUrl>/api/juegos?filterBy=preciomenorigual&filter=120.36**
 
 obtener todos los juegos cuyo nombre contengan league
 
-GET <BaseUrl>/api/juegos?filterBy=nombre&filter=league
+**GET <BaseUrl>/api/juegos?filterBy=nombre&filter=league**
 
 
     
