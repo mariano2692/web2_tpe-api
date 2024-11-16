@@ -3,8 +3,8 @@ require_once 'app/model/model.php';
 
 class CompaniesModel extends Model {
 
-    public function getAll(){
-        $sql = 'SELECT * FROM companias';
+    public function getCompanies(){
+        $sql = 'SELECT * FROM compania';
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -13,18 +13,26 @@ class CompaniesModel extends Model {
     }
 
 
-    public function getCompania($id){
+    public function getCompanie($id){
         $query = $this->db->prepare('SELECT * FROM compania WHERE id_compania = ?');
         $query->execute([$id]);
         $compania = $query->fetch(PDO::FETCH_OBJ);
         return $compania;
     }
 
-    public function getCompaniaNombre($name){
-        $query = $this->db->prepare('SELECT id_compania FROM compania WHERE nombre = ?');
-        $query->execute([$name]);
-        $compania = $query->fetch(PDO::FETCH_OBJ);
-        return $compania;
+    public function getCompanieFilterBy($columnLike, $filter){
+        if (strpos($columnLike, 'LIKE') !== false) {
+            $filter = "%$filter%"; // Agregar comodines al inicio y al final
+        }
+        $query = $this->db->prepare("SELECT * FROM compania WHERE $columnLike ?");
+        $query->bindValue(1, $filter);
+        $query->execute();
+        $companias = $query->fetchAll(PDO::FETCH_OBJ);
+        return $companias;
+    }
+
+    public function getCompaniesFilterByNombre($filter){
+        return $this->getCompanieFilterBy("nombre LIKE ", $filter);
     }
 
     public function addCompanie($nombre,$fecha,$oficinas,$sitioweb){
@@ -34,7 +42,7 @@ class CompaniesModel extends Model {
         return $id;
     }
 
-    public function editeCompanie($id,$nombre,$fecha,$oficinas,$sitioweb){
+    public function updateCompanie($id,$nombre,$fecha,$oficinas,$sitioweb){
         $query = $this->db->prepare('UPDATE companias SET nombre = ?, fecha_fundacion = ?, oficinas_centrales = ?, sitio_web = ? WHERE id_compania = ?');
         $query->execute([$nombre,$fecha,$oficinas,$sitioweb,$id]);
     }

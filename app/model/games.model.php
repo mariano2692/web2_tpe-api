@@ -34,12 +34,12 @@ require_once 'app/model/model.php';
             ];
             $allowedOrderColumns = ['id_juegos', 'juegos.nombre', 'fecha_lanzamiento', 'modalidad'];
             
-        if (!in_array($columnLike, $allowedColumns)) {
-            throw new Exception("Parámetro de columna no válido");
-        }
-        if (empty($order) || !in_array($order, $allowedOrderColumns)) {
-            $order = 'id_juegos'; // Valor predeterminado si $order es vacío o no válido
-        }
+            if (!in_array($columnLike, $allowedColumns)) {
+                throw new Exception("Parámetro de columna no válido");
+            }
+            if (empty($order) || !in_array($order, $allowedOrderColumns)) {
+                $order = 'id_juegos'; // Valor predeterminado si $order es vacío o no válido
+            }
 
             if (strpos($columnLike, 'LIKE') !== false) {
                 $filter = "%$filter%"; // Agregar comodines al inicio y al final

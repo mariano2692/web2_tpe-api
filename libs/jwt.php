@@ -2,14 +2,7 @@
 
     class AuthJWT{
 
-        function getAuthHeaders() {
-            $header = "";
-            if(isset($_SERVER['HTTP_AUTHORIZATION']))
-                $header = $_SERVER['HTTP_AUTHORIZATION'];
-            if(isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION']))
-                $header = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
-            return $header;
-        }
+
     
         function createJWT($payload) {
             // Header
@@ -60,16 +53,7 @@
             return $payload;
         }
     
-        function currentUser() {
-            $auth = $this->getAuthHeaders(); 
-            $auth = explode(" ", $auth);
-    
-            if($auth[0] != "Bearer") {
-                return false;
-            }
-    
-            return $this->validateJWT($auth[1]);
-        }
+
 
     }
 

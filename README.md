@@ -6,23 +6,10 @@
 
 
 ## Descripción:
-Esta es una descripción adaptada para una aplicación de gestión de Juegos y Compañías con una relación 1 a N:
+Tercera entrega del Trabajo Práctico Especial de Web 2 Tudai Grupo 26 Catalogo de juegos. Es un servicio web de tipo RESTFul de una base de datos con su tabla de juegos y companias de dichos juegos. Hay una relacion 1 a N, tanto entre juegos y companias. 
+Además se usa una tabla de usuarios para los accesos (login).
+Al visualizar los datos de los Juegos, se traen también los correspondientes datos del nombre de la compania 
 
-La aplicación maneja una base de datos de juegos, compañías de dichos juegos, con relacion 1 a N: entre Compañías y Juegos. Además, incluye una tabla de usuarios para gestionar los accesos mediante login.
-
-La aplicación permite mostrar los datos de los juegos. En la tabla donde se listan los juegos, aparecen íconos de Edición y Borrado junto a cada uno de ellos, pero solo se muestran si un usuario ha iniciado sesión correctamente. Al pulsar en el ícono de edición, se puede modificar directamente los datos del juego, como el título, fecha de lanzamiento, y seleccionar el género y la compañía de una lista disponible en la base de datos.
-
-Finalmente, se incluye un botón para añadir nuevos juegos, que solo está visible cuando un usuario ha iniciado sesión, y redirige a un formulario para dar de alta nuevos juegos.
-
-Al hacer click en el menú Compañías, se visualiza una lista de las compañías de videojuegos, junto con los datos de cada una. Si se selecciona una compañía en particular, se muestran los datos correspondientes.
-
-El funcionamiento de la Edición, Borrado, Alta de nuevas compañías sigue un esquema similar al aplicado para la lista de juegos. Al intentar eliminar una compañía, el sistema verifica que no tenga juegos asociados; si los tiene, no permite su eliminación hasta que dichos juegos sean borrados o asignados a otra compañía.
-
-* Se incluye la opción de Config.php y AutoDeploy.
-* Todo el sistema usa el patrón MVC.
-* Las url son semánticas.
-* Se incluye el SQL para la instalación de la base de datos
-* Se incluye un usario "webadmin" con clave "admin"
 
 ## tablas
 
@@ -49,3 +36,38 @@ la tabla usuarios tiene:
 
 ## DER
 ![Diagrama Entidad Relacion](/db_juegos.png)
+
+## ENDPOINTS
+/api/usuarios/token
+
+GET /api/juegos
+GET /api/juegos/:id
+POST /api/juegos
+PUT /api/juegos/:id
+DELETE /api/juegos/:id
+
+
+GET /api/companias
+GET /api/companias/:id
+POST /api/companias
+PUT /api/companias/:id
+
+
+## AUTENTICACION
+
+Para realizar acciones como borrar, modificar o agregar un nuevo juego o compania, es necesario que los usuarios estén autenticados. Para ello, deben identificarse utilizando su nombre de usuario y contraseña (por ejemplo: webadmin y admin) a través de la autenticación básic (Basic Authentication). Esta autenticación se realiza enviando una solicitud GET al endpoint /api/usuarios/token, el cual devuelve un token JWT codificado. Este token debe ser copiado y enviado en cada operación como un Bearer Token, incluyéndolo en el encabezado de autorización (Authorization: Bearer tokenJWT).
+
+* GET /api/usuarios/token
+Este endpoint permite a los usuarios obtener un token JWT. Para utilizarlo, se deben enviar las credenciales en el encabezado de la solicitud en formato Base64 (usuario:contraseña).
+
+* nombre usuario: webadmin
+* password: admin
+
+## JUEGOS
+
+## GET `<BaseUrl>/api/juegos`
+Devuelve los juegos disponibles en la base datos, permitiendo aplicar filtros y ordenamiento de los resultados.
+### ejemplo de uso
+
+```http
+GET <BaseUrl>/api/juegos

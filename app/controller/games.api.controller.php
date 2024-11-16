@@ -1,21 +1,15 @@
 <?php
 require_once './app/model/games.model.php';
-require_once './app/model/companies.model.php';
-require_once './app/model/review.model.php';
 require_once './app/view/json.view.php';
 require_once './libs/jwt.php';
 
     class GamesApiController {
         private $gamesModel;
-        private $companiesModel;
-        private $reviewModel;
         private $view;
         private $auth;
 
         public function __construct(){
             $this->gamesModel = new gamesModel();
-            $this->companiesModel = new CompaniesModel();
-            $this->reviewModel = new ReviewModel();
             $this->view = new JSONView();
             $this->auth = new AuthJWT();
         }
@@ -24,11 +18,10 @@ require_once './libs/jwt.php';
         // /api/juegos (GET)
         public function getAllGames($req,$res){
 
-            // $user = $this->auth->currentUser();
-            // if(!$user){
-            //     $this->view->response("no autorizado",401);
-            //     return;
+            // if(!$res->user){
+            //     return $this->view->response("No autorizado", 401);
             // }
+
 
 
             $filtro = new stdClass();
@@ -97,8 +90,8 @@ require_once './libs/jwt.php';
         public function getGame($req,$res){
 
 
-            $user = $this->auth->currentUser();
-            if(!$user){
+       
+            if(!$res->user){
                 $this->view->response("no autorizado",401);
                 return;
             }
@@ -119,13 +112,12 @@ require_once './libs/jwt.php';
         // /api/juegos/:id (DELETE)
         public function delete($req, $res) {
 
-            $user = $this->auth->currentUser();
-            if(!$user){
+            if(!$res->user){
                 $this->view->response("no autorizado",401);
                 return;
             }
 
-            if(!$user->rol != 'administrador'){
+            if(!$res->user->rol != 'administrador'){
                 $this->view->response("prohibido",403);
             }
 
@@ -146,13 +138,12 @@ require_once './libs/jwt.php';
 
         public function create($req, $res) {
 
-            $user = $this->auth->currentUser();
-            if(!$user){
+            if(!$res->user){
                 $this->view->response("no autorizado",401);
                 return;
             }
 
-            if(!$user->rol != 'administrador'){
+            if(!$res->user->rol != 'administrador'){
                 $this->view->response("prohibido",403);
             }
 
@@ -187,13 +178,12 @@ require_once './libs/jwt.php';
         public function update($req, $res) {
 
 
-            $user = $this->auth->currentUser();
-            if(!$user){
+            if(!$res->user){
                 $this->view->response("no autorizado",401);
                 return;
             }
 
-            if(!$user->rol != 'administrador'){
+            if(!$res->user->rol != 'administrador'){
                 $this->view->response("prohibido",403);
             }
 
