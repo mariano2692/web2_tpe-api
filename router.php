@@ -13,17 +13,17 @@
     #                 endpoint                   verbo      controller               metodo
     $router->addRoute('juegos'      ,            'GET',     'GamesApiController',   'getAllGames');
     $router->addRoute('juegos/:id'  ,            'GET',     'GamesApiController',   'getGame'   );
-    $router->addRoute('juegos/:id'  ,            'DELETE',  'GamesApiController',    'delete');
-    $router->addRoute('juegos'  ,                'POST',    'GamesApiController',    'create');
-    $router->addRoute('juegos/:id'  ,            'PUT',     'GamesApiController',    'update');
+    $router->addRoute('juegos/:id'  ,            'DELETE',  'GamesApiController',   'delete');
+    $router->addRoute('juegos'  ,                'POST',    'GamesApiController',   'create');
+    $router->addRoute('juegos/:id'  ,            'PUT',     'GamesApiController',   'update');
 
 
 
-    $router->addRoute('companias'  ,               'GET',      'CompanieApiController',    'getAll');
-    $router->addRoute('companias/:id'  ,               'GET',      'CompanieApiController',    'getCompanie');
-    $router->addRoute('companias'  ,               'POST',      'CompanieApiController',    'getAll');
-    $router->addRoute('companias'  ,               'PUT',      'CompanieApiController',    'getAll');
+    $router->addRoute('companias'  ,             'GET',      'CompanieApiController',    'getAll');
+    $router->addRoute('companias/:id'  ,         'GET',      'CompanieApiController',    'getCompanie');
+    $router->addRoute('companias'  ,             'POST',     'CompanieApiController',    'getAll');
+    $router->addRoute('companias'  ,             'PUT',      'CompanieApiController',    'getAll');
     
-    $router->addRoute('usuarios/token'    ,            'GET',     'UserApiController',   'getToken');
+    $router->addRoute('usuarios/token'    ,      'GET',      'UserApiController',   'getToken');
 
     $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);

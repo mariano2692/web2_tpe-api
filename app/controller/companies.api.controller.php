@@ -106,7 +106,8 @@ class CompanieApiController {
 
              $this->companiesModel->updateCompanie($id,$nombre,$fecha,$oficinas,$sitioweb);
 
-
+             $companie = $this->companiesModel->getCompanie($id);
+             return $this->view->response($companie,200);
 
         }
 
