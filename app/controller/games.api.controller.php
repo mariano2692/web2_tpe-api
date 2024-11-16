@@ -20,6 +20,8 @@ require_once './libs/jwt.php';
             $this->auth = new AuthJWT();
         }
 
+        //////////////////////////////////////GET ALL GAMES//////////////////////////////////////////////////////////////////////////
+        // /api/juegos (GET)
         public function getAllGames($req,$res){
 
             // $user = $this->auth->currentUser();
@@ -28,52 +30,70 @@ require_once './libs/jwt.php';
             //     return;
             // }
 
-            $games = [];
 
-            //FILTRAR POR COMPANIA
-
-            $filtrarCompania = null;
-
-            if(isset($req->query->compania)){
-                //BUSCO EL ID DE LA COMPANIA POR EL NOMBRE;
-                $companiaObj = $this->companiesModel->getCompaniaNombre($req->query->compania);
-                $filtrarCompania = $companiaObj->id_compania;
-            }
-
-
-            //FILTRAR POR PRECIO MENOR 
-            $filtrarPrecio = null;
-            //FILTRAR POR NOMBRE
-            $filtrarNombre = null;
-
-            if(isset($req->query->precio)){
-                $filtrarPrecio = $req->query->precio;
-            }
-
-            if(isset($req->query->nombre)){
-                $filtrarNombre = $req->query->nombre;
-            }
-            
-            // ORDENAR POR FECHA, NOMBRE, PRECIO
-
-            $orderBy = false;
+            $filtro = new stdClass();
+            //verificar si hay un orden
             if(isset($req->query->orderBy)){
-                $orderBy = $req->query->orderBy;
+                $filtro->order = $req->query->orderBy;
+            }
+            else{
+                $filtro->order = '';
+            }
+            //verificar si hay un filtro
+            if(isset($req->query->filterBy)){
+                $filtro->filterBy = $req->query->filterBy;
+            }
+            else{
+                $filtro->filterBy = '';
+            }
+            //verificar el valor por el que se quiere filtrar
+            if(isset($req->query->filter)){
+                $filtro->filter = $req->query->filter;
+            }
+            else{
+                $filtro->filter = '';
             }
 
-            $games = $this->gamesModel->getGames($orderBy,$filtrarPrecio,$filtrarNombre,$filtrarCompania);
-
-            foreach ($games as $game) {
-        
-                //AGREGO LAS DATOS DE LA COMPANIA QUE LE CORRESPONDE A CADA JUEGO
-                $game->compania = $this->companiesModel->getCompania($game->id_compania);
-                //ARRAY DE COMENTARIOS QUE CORRESPONDEN A CADA JUEGO
-                $game->resenias = $this->reviewModel->getReviewByGame($game->id_juegos);
+            //usar el filtro
+            switch($filtro->filterBy){
+                case '':
+                    $games = $this->gamesModel->getGames($filtro->order);
+                    return $this->view->response($games);
+                    break;
+                case 'nombre':
+                    $games = $this->gamesModel->getGamesFilterByNombre($filtro->filter,$filtro->order);
+                    return $this->view->response($games);
+                    break;
+                case 'precioigual':
+                    $games = $this->gamesModel->getGamesFilterByPrecioIgual($filtro->filter,$filtro->order);
+                    return $this->view->response($games);
+                    break;
+                case 'preciomenorigual':
+                    $games = $this->gamesModel->getGamesFilterByPrecioMenorIgual($filtro->filter,$filtro->order);
+                    return $this->view->response($games);
+                    break;
+                case 'preciomenor':
+                    $games = $this->gamesModel->getGamesFilterByPrecioMenor($filtro->filter,$filtro->order);
+                    return $this->view->response($games);
+                    break;
+                case 'preciomayorigual':
+                    $games = $this->gamesModel->getGamesFilterByPrecioMayorIgual($filtro->filter,$filtro->order);
+                    return $this->view->response($games);
+                    break;
+                case 'preciomayor':
+                    $games = $this->gamesModel->getGamesFilterByPrecioMayor($filtro->filter,$filtro->order);
+                    return $this->view->response($games);
+                    break;
+                default:
+                    $this->view->response('valor no válido', 400);
+                    break;
             }
 
-            return $this->view->response($games);
+
         }
 
+        ///////////////////////////////////////////GET GAME////////////////////////////////////////////////////////////////////////
+        // /api/juegos/:id  (GET)
         public function getGame($req,$res){
 
 
@@ -83,6 +103,7 @@ require_once './libs/jwt.php';
                 return;
             }
 
+            //obtengo el id
             $id = $req->params->id;
 
             $game = $this->gamesModel->getGame($id);
@@ -94,6 +115,8 @@ require_once './libs/jwt.php';
             return $this->view->response($game);
         }
 
+        ////////////////////////////////////////////DELETE/////////////////////////////////////////////////////////////////////////////
+        // /api/juegos/:id (DELETE)
         public function delete($req, $res) {
 
             $user = $this->auth->currentUser();
@@ -118,6 +141,8 @@ require_once './libs/jwt.php';
             $this->view->response("el juego con el id=$id se eliminó con éxito");
         }
 
+        ////////////////////////////////////////////////////////POST///////////////////////////////////////////////////////////////////////
+        // /api/juegos (POST)
 
         public function create($req, $res) {
 
@@ -155,6 +180,9 @@ require_once './libs/jwt.php';
             $game = $this->gamesModel->getGame($id);
             return $this->view->response($game, 201);
         }
+
+        ///////////////////////////////////////////////////UPDATE///////////////////////////////////////////////////////////////////////
+        // /api/juegos/:id (PUT)
 
         public function update($req, $res) {
 
