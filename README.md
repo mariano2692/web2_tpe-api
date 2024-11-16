@@ -71,3 +71,46 @@ Devuelve los juegos disponibles en la base datos, permitiendo aplicar filtros y 
 
 ```http
 GET <BaseUrl>/api/juegos
+
+```markdown
+### Query Params:
+
+- **Ordenamiento:**
+  - `orderBy` : Campo por el que se desea ordenar los resultados. Los campos válidos incluyen:
+    - `id_juegos`: ordena los juegos por ID.
+    - `nombre`: Ordena los juegos por nombre.
+    - `fecha_lanzamiento`: Ordena los juegos por fecha.
+    - `precio`: Ordena los juegos por precio.
+
+**ejemplo de ordenamiento
+```http
+GET <BaseUrl>/api/juegos?orderBy=nombre
+
+- **Filtro:**
+ - `filterBy` : Campo por el que se desea filtrar los resultados. Los campos válidos incluyen:
+    - `nombre`: Filtra los juegos por el nombre especificado (filtra los juegos cuyo nombre contiene el valor del filtro dado).
+    - `precioigual`: Filtra los juegos cuyo precio sea el especificado.
+    - `preciomenor`: Filtra los juegos cuyo precio sea menor al especificado.
+    - `preciomayor`: Filtra los juegos cuyo precio sea mayor al especificado.
+    - `preciomenorigual`: Filtra los juegos cuyo precio sea menor o igual al especificado.
+    - `preciomayorigual`: Filtra los juegos cuyo precio sea amyor o igual al especificado.
+
+- `filter` : Campo por el que se desea filtrar los resultados.
+
+**ejemplo para filtrar
+
+obtener todos los juegos con un precio igual a 59.99
+```http
+GET <BaseUrl>/api/juegos?filterBy=precioigual&filter=59.99
+
+obtener todos los juegos con un precio menor o igual a 120.36
+```http
+GET <BaseUrl>/api/juegos?filterBy=preciomenorigual&filter=120.36
+
+obtener todos los juegos cuyo nombre contengan league
+```http
+GET <BaseUrl>/api/juegos?filterBy=nombre&filter=league
+
+
+    
+
