@@ -69,10 +69,10 @@ Este endpoint permite a los usuarios obtener un token JWT. Para utilizarlo, se d
 Devuelve los juegos disponibles en la base datos, permitiendo aplicar filtros y ordenamiento de los resultados.
 ### ejemplo de uso
 
-```http
+
 GET <BaseUrl>/api/juegos
 
-```markdown
+
 ### Query Params:
 
 - **Ordenamiento:**
@@ -83,7 +83,7 @@ GET <BaseUrl>/api/juegos
     - `precio`: Ordena los juegos por precio.
 
 **ejemplo de ordenamiento
-```http
+
 GET <BaseUrl>/api/juegos?orderBy=nombre
 
 - **Filtro:**
@@ -100,15 +100,15 @@ GET <BaseUrl>/api/juegos?orderBy=nombre
 **ejemplo para filtrar
 
 obtener todos los juegos con un precio igual a 59.99
-```http
+
 GET <BaseUrl>/api/juegos?filterBy=precioigual&filter=59.99
 
 obtener todos los juegos con un precio menor o igual a 120.36
-```http
+
 GET <BaseUrl>/api/juegos?filterBy=preciomenorigual&filter=120.36
 
 obtener todos los juegos cuyo nombre contengan league
-```http
+
 GET <BaseUrl>/api/juegos?filterBy=nombre&filter=league
 
 
