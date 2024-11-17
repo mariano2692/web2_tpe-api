@@ -59,8 +59,7 @@ la tabla usuarios tiene:
 Para realizar acciones como borrar, modificar o agregar un nuevo juego o compania, es necesario que los usuarios estén autenticados. Para ello, deben identificarse utilizando su nombre de usuario y contraseña (usuario: webadmin, password: admin) a través de la autenticación básic. Esta autenticación se realiza enviando una solicitud GET al endpoint /api/usuarios/token, el cual devuelve un token JWT codificado. Este token debe ser copiado y enviado en cada operación como un Bearer Token, incluyéndolo en el encabezado de autorización.
 
 - **GET** `<<BaseUrl>>/api/usuarios/token`  
-Este endpoint proporciona un token JWT a los usuarios. Para acceder a él, es necesario enviar las credenciales en el encabezado de la solicitud codificadas en formato Base64 (usuario
-ña).
+Este endpoint proporciona un token JWT a los usuarios. Para acceder a él, es necesario enviar las credenciales en el encabezado de la solicitud codificadas en formato Base64
 
 - **iniciar sesión**:  
     - **Nombre de usuario**: `webadmin`  
