@@ -190,4 +190,11 @@ GET <<BaseUrl>>/api/juegos?filterBy=nombre&filter=league
   
 ---
 
+- **DELETE** `<<BaseUrl>>/api/companias/:id`  
+
+  Elimina la compania correspondiente al `id`.
+
+  
+---
+
 
