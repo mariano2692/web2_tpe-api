@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2024 a las 23:05:05
+-- Tiempo de generación: 17-11-2024 a las 04:10:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -74,29 +74,9 @@ INSERT INTO `juegos` (`id_juegos`, `nombre`, `fecha_lanzamiento`, `modalidad`, `
 (11, 'Far Cry 6', '2021-10-07', 'Videojuego multijugador', 'PlayStation 5, PlayStation 4, Xbox Series X|S', 2, 0.00),
 (25, 'pokemon go', '2023-01-07', 'realidad aumentada', 'iOS, android,', 3, 0.00),
 (27, 'pokemon go 2', '2023-01-07', 'realidad aumentada', 'iOS, android, nuevo', 3, 150.66),
-(28, 'world of warcraft', '2022-04-12', 'multi jugador', 'windows,linux', 1, 120.36);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `reseñas`
---
-
-CREATE TABLE `reseñas` (
-  `id_reseña` int(11) NOT NULL,
-  `id_juego` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `titulo` varchar(255) NOT NULL,
-  `comentario` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `reseñas`
---
-
-INSERT INTO `reseñas` (`id_reseña`, `id_juego`, `id_usuario`, `titulo`, `comentario`) VALUES
-(1, 11, 1, 'muy bueno\r\n', 'Historia y misiones 10/10 me encantan las misiones principales y secundarias.\r\n'),
-(2, 7, 1, 'decepcion', 'La verdad esq yo era feliz antes de jugar Legue Of Legends');
+(29, 'Rainbow Six Siege', '2015-12-01', 'Multijugador', 'PC, PS4, PS5, Xbox One, Xbox Series X/S', 3, 19.99),
+(30, 'Assassins Creed Valhalla', '2020-11-10', 'Un jugador', 'PC, PS4, PS5, Xbox One, Xbox Series X/S', 2, 59.99),
+(31, 'world of warcraft', '2022-04-12', 'multi jugador', 'windows,linux', 1, 120.36);
 
 -- --------------------------------------------------------
 
@@ -136,14 +116,6 @@ ALTER TABLE `juegos`
   ADD KEY `id_compania` (`id_compania`);
 
 --
--- Indices de la tabla `reseñas`
---
-ALTER TABLE `reseñas`
-  ADD PRIMARY KEY (`id_reseña`),
-  ADD KEY `id_juego` (`id_juego`),
-  ADD KEY `id_usuario` (`id_usuario`);
-
---
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -157,19 +129,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `compania`
 --
 ALTER TABLE `compania`
-  MODIFY `id_compania` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_compania` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `juegos`
 --
 ALTER TABLE `juegos`
-  MODIFY `id_juegos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
---
--- AUTO_INCREMENT de la tabla `reseñas`
---
-ALTER TABLE `reseñas`
-  MODIFY `id_reseña` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_juegos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -186,13 +152,6 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `juegos`
   ADD CONSTRAINT `juegos_ibfk_1` FOREIGN KEY (`id_compania`) REFERENCES `compania` (`id_compania`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `reseñas`
---
-ALTER TABLE `reseñas`
-  ADD CONSTRAINT `reseñas_ibfk_1` FOREIGN KEY (`id_juego`) REFERENCES `juegos` (`id_juegos`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `reseñas_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

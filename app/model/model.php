@@ -23,7 +23,7 @@
                 
                 $sql =<<<END
                 --
-                -- Base de datos: `db_juegos`
+                -- Base de datos: `db_apijuegos`
                 --
 
                 -- --------------------------------------------------------
@@ -61,21 +61,27 @@
                 `fecha_lanzamiento` date NOT NULL,
                 `modalidad` varchar(150) NOT NULL,
                 `plataformas` varchar(255) NOT NULL,
-                `id_compania` int(11) NOT NULL
+                `id_compania` int(11) NOT NULL,
+                `precio` decimal(10,2) NOT NULL
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
                 --
                 -- Volcado de datos para la tabla `juegos`
                 --
 
-                INSERT INTO `juegos` (`id_juegos`, `nombre`, `fecha_lanzamiento`, `modalidad`, `plataformas`, `id_compania`) VALUES
-                (5, 'Assassin\'s Creed IV: Black Flag', '2013-10-19', 'Videojuego multijugador', 'PlayStation 4, Nintendo Switch, PlayStation 3', 2),
-                (6, 'Far Cry 4', '2014-11-17', 'Videojuego multijugador, Videojuego de un jugador', 'PlayStation 4, PlayStation 3, Xbox 360, Microsoft Windows, Xbox One', 2),
-                (7, 'League of Legends', '2009-10-27', 'MOBA', ' Microsoft Windows, macOS', 1),
-                (8, 'Valorant', '2020-06-02', 'Videojuego multijugador', 'PlayStation 5, Microsoft Windows, Xbox Series X|S, Android', 1),
-                (9, 'Teamfight Tactics', '2019-09-26', 'Videojuego multijugador', 'iOS, Android, macOS, Microsoft Windows, Mac OS', 1),
-                (10, 'Overwatch 2', '2022-10-04', 'Videojuego multijugador', 'PlayStation 5, PlayStation 4, Nintendo Switch, Microsoft Windows, Xbox One, Xbox Series X|S, GeForce Now', 3),
-                (11, 'Far Cry 6', '2021-10-07', 'Videojuego multijugador', 'PlayStation 5, PlayStation 4, Xbox Series X|S', 2);
+                INSERT INTO `juegos` (`id_juegos`, `nombre`, `fecha_lanzamiento`, `modalidad`, `plataformas`, `id_compania`, `precio`) VALUES
+                (5, 'Assassin\'s Creed IV: Black Flag', '2013-10-19', 'Videojuego multijugador', 'PlayStation 4, Nintendo Switch, PlayStation 3', 2, 0.00),
+                (6, 'Far Cry 4', '2014-11-17', 'Videojuego multijugador, Videojuego de un jugador', 'PlayStation 4, PlayStation 3, Xbox 360, Microsoft Windows, Xbox One', 2, 0.00),
+                (7, 'League of Legends', '2009-10-27', 'MOBA', ' Microsoft Windows, macOS', 1, 0.00),
+                (8, 'Valorant', '2020-06-02', 'Videojuego multijugador', 'PlayStation 5, Microsoft Windows, Xbox Series X|S, Android', 1, 0.00),
+                (9, 'Teamfight Tactics', '2019-09-26', 'Videojuego multijugador', 'iOS, Android, macOS, Microsoft Windows, Mac OS', 1, 0.00),
+                (10, 'Overwatch 2', '2022-10-04', 'Videojuego multijugador', 'PlayStation 5, PlayStation 4, Nintendo Switch, Microsoft Windows, Xbox One, Xbox Series X|S, GeForce Now', 3, 0.00),
+                (11, 'Far Cry 6', '2021-10-07', 'Videojuego multijugador', 'PlayStation 5, PlayStation 4, Xbox Series X|S', 2, 0.00),
+                (25, 'pokemon go', '2023-01-07', 'realidad aumentada', 'iOS, android,', 3, 0.00),
+                (27, 'pokemon go 2', '2023-01-07', 'realidad aumentada', 'iOS, android, nuevo', 3, 150.66),
+                (29, 'Rainbow Six Siege', '2015-12-01', 'Multijugador', 'PC, PS4, PS5, Xbox One, Xbox Series X/S', 3, 19.99),
+                (30, 'Assassins Creed Valhalla', '2020-11-10', 'Un jugador', 'PC, PS4, PS5, Xbox One, Xbox Series X/S', 2, 59.99),
+                (31, 'world of warcraft', '2022-04-12', 'multi jugador', 'windows,linux', 1, 120.36);
 
                 -- --------------------------------------------------------
 
@@ -128,13 +134,13 @@
                 -- AUTO_INCREMENT de la tabla `compania`
                 --
                 ALTER TABLE `compania`
-                MODIFY `id_compania` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+                MODIFY `id_compania` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
                 --
                 -- AUTO_INCREMENT de la tabla `juegos`
                 --
                 ALTER TABLE `juegos`
-                MODIFY `id_juegos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+                MODIFY `id_juegos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
                 --
                 -- AUTO_INCREMENT de la tabla `usuario`
