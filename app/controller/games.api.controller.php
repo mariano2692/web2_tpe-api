@@ -21,7 +21,8 @@ require_once './libs/jwt.php';
             // if(!$res->user){
             //     return $this->view->response("No autorizado", 401);
             // }
-
+            
+     
 
 
             $filtro = new stdClass();
@@ -90,12 +91,6 @@ require_once './libs/jwt.php';
         public function getGame($req,$res){
 
 
-       
-            if(!$res->user){
-                $this->view->response("no autorizado",401);
-                return;
-            }
-
             //obtengo el id
             $id = $req->params->id;
 
@@ -117,9 +112,6 @@ require_once './libs/jwt.php';
                 return;
             }
 
-            if(!$res->user->rol != 'administrador'){
-                $this->view->response("prohibido",403);
-            }
 
             $id = $req->params->id;
     
@@ -141,10 +133,6 @@ require_once './libs/jwt.php';
             if(!$res->user){
                 $this->view->response("no autorizado",401);
                 return;
-            }
-
-            if(!$res->user->rol != 'administrador'){
-                $this->view->response("prohibido",403);
             }
 
             // valido los datos
@@ -183,9 +171,6 @@ require_once './libs/jwt.php';
                 return;
             }
 
-            if(!$res->user->rol != 'administrador'){
-                $this->view->response("prohibido",403);
-            }
 
             $id = $req->params->id;
     
@@ -211,7 +196,7 @@ require_once './libs/jwt.php';
 
     
             // actualizo el juego
-            $this->gamesModel->addGame($nombre, $fecha, $modalidad, $plataformas,$id_compania,$precio,$id);
+            $this->gamesModel->updateGame($nombre, $fecha, $modalidad, $plataformas,$id_compania,$precio,$id);
     
             // obtengo el juego que modifique y lo devuelvo
             $game = $this->gamesModel->getGame($id);

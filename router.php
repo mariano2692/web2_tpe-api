@@ -21,8 +21,9 @@
 
     $router->addRoute('companias'  ,             'GET',      'CompanieApiController',    'getAll');
     $router->addRoute('companias/:id'  ,         'GET',      'CompanieApiController',    'getCompanie');
-    $router->addRoute('companias'  ,             'POST',     'CompanieApiController',    'getAll');
-    $router->addRoute('companias'  ,             'PUT',      'CompanieApiController',    'getAll');
+    $router->addRoute('companias'  ,             'POST',     'CompanieApiController',    'create');
+    $router->addRoute('companias/:id'  ,         'PUT',      'CompanieApiController',    'update');
+    $router->addRoute('companias/:id'  ,         'DELETE',   'CompanieApiController',    'delete');
     
     $router->addRoute('usuarios/token'    ,      'GET',      'UserApiController',   'getToken');
 

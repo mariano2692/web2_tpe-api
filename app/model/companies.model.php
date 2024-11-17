@@ -36,15 +36,20 @@ class CompaniesModel extends Model {
     }
 
     public function addCompanie($nombre,$fecha,$oficinas,$sitioweb){
-        $query = $this->db->prepare('INSERT INTO companias(nombre, fecha_fundacion, oficinas_centrales, sitio_web) VALUES (?, ?, ?, ?)');
+        $query = $this->db->prepare('INSERT INTO compania(nombre, fecha_fundacion, oficinas_centrales, sitio_web) VALUES (?, ?, ?, ?)');
         $query->execute([$nombre,$fecha,$oficinas,$sitioweb]);
         $id = $this->db->lastInsertId();
         return $id;
     }
 
     public function updateCompanie($id,$nombre,$fecha,$oficinas,$sitioweb){
-        $query = $this->db->prepare('UPDATE companias SET nombre = ?, fecha_fundacion = ?, oficinas_centrales = ?, sitio_web = ? WHERE id_compania = ?');
+        $query = $this->db->prepare('UPDATE compania SET nombre = ?, fecha_fundacion = ?, oficinas_centrales = ?, sitio_web = ? WHERE id_compania = ?');
         $query->execute([$nombre,$fecha,$oficinas,$sitioweb,$id]);
+    }
+
+    public function deleteCompanie($id){
+        $query = $this->db->prepare('DELETE FROM compania WHERE id_compania = ?');
+        $query->execute(array($id));
     }
    
 }

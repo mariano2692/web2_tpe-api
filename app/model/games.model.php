@@ -7,11 +7,13 @@ require_once 'app/model/model.php';
 
    
         public function getGames($order='id_juegos'){
+    
+
             $validColumns = ['id_juegos', 'nombre', 'fecha_lanzamiento', 'modalidad', 'plataformas', 'precio'];
 
             // Validar que $order sea una columna válida, si no, usar la columna por defecto
             if (!in_array($order, $validColumns)) {
-            $order = 'id_juegos';
+                $order = 'id_juegos';
             }
             $sql = "SELECT id_juegos, juegos.nombre, fecha_lanzamiento, modalidad, plataformas, juegos.id_compania, compania.nombre as nombre_compania, precio FROM juegos, compania 
                     WHERE juegos.id_compania = compania.id_compania ORDER BY $order";
@@ -41,7 +43,7 @@ require_once 'app/model/model.php';
                 $order = 'id_juegos'; // Valor predeterminado si $order es vacío o no válido
             }
 
-            if (strpos($columnLike, 'LIKE') !== false) {
+            if (strpos($columnLike, 'LIKE') !== false) { //si LIKE esta en column like se modificar el filter
                 $filter = "%$filter%"; // Agregar comodines al inicio y al final
             }
 
@@ -98,20 +100,16 @@ require_once 'app/model/model.php';
         //reutilizo el metodo addGame, si no viene un id, estoy agregando un juego nuevo, si viene un id estoy modificando un juego existente
 
         public function addGame($nombre,$fecha,$modalidad,$plataforma,$id_compania,$precio,$id){
-            try {
-                if ($id == 0) {
                     $query = $this->db->prepare('INSERT INTO juegos(nombre, fecha_lanzamiento, modalidad, plataformas, id_compania, precio) VALUES(?, ?, ?, ?, ?, ?)');
                     $query->execute(array($nombre, $fecha, $modalidad, $plataforma, $id_compania, $precio));
                     $id = $this->db->lastInsertId();
                     return $id;
-                } else {
-                    $query = $this->db->prepare("UPDATE juegos SET nombre = ?, fecha_lanzamiento = ?, modalidad = ?, plataformas = ?, id_compania = ?, precio = ? WHERE id_juegos = ?");
-                    $query->execute(array($nombre, $fecha, $modalidad, $plataforma, $id_compania, $precio, $id));
-                }
-            } catch (PDOException $e) {
-                echo "Error: " . $e->getMessage(); // Muestra el mensaje de error
-            }
-            
+               
+        }
+
+        public function updateGame($nombre,$fecha,$modalidad,$plataforma,$id_compania,$precio,$id){
+            $query = $this->db->prepare("UPDATE juegos SET nombre = ?, fecha_lanzamiento = ?, modalidad = ?, plataformas = ?, id_compania = ?, precio = ? WHERE id_juegos = ?");
+            $query->execute(array($nombre, $fecha, $modalidad, $plataforma, $id_compania, $precio, $id));
         }
 
         public function deleteGame($id){

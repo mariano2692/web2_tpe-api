@@ -52,7 +52,7 @@ class CompanieApiController {
                 $companie = $this->companiesModel->getCompanie($id);
 
                 if(!$companie){
-                    return $this->view->response("el juego con el id=$id no existe", 404);
+                    return $this->view->response("la compania con el id=$id no existe", 404);
                 }
 
                 return $this->view->response($companie);
@@ -61,9 +61,16 @@ class CompanieApiController {
         
         
         public function create($req,$res){
+
+            if(!$res->user){
+                $this->view->response("no autorizado",401);
+                return;
+            }
+
+
             // valido los datos
-            if (empty($req->body->nombre) || empty($req->body->fecha) || empty($req->body->modalidad) || 
-            empty($req->body->plataformas) || empty($req->body->id_compania) || empty($req->body->precio)) {
+            if (empty($req->body->nombre) || empty($req->body->fecha) ||  
+            empty($req->body->oficinas) || empty($req->body->sitio_web)) {
             return $this->view->response('Faltan completar datos', 400);
             }
 
@@ -71,7 +78,7 @@ class CompanieApiController {
             $nombre = $req->body->nombre;       
             $fecha = $req->body->fecha;       
             $oficinas = $req->body->oficinas;
-            $sitioweb = $req->body->sitioweb;   
+            $sitioweb = $req->body->sitio_web;   
 
             // inserto los datos
             $id = $this->companiesModel->addCompanie($nombre,$fecha,$oficinas,$sitioweb);
@@ -85,6 +92,13 @@ class CompanieApiController {
         }
 
         public function update($req,$res){
+
+            if(!$res->user){
+                $this->view->response("no autorizado",401);
+                return;
+            }
+
+
             $id = $req->params->id;
 
             $companie = $this->companiesModel->getCompanie($id);
@@ -94,21 +108,38 @@ class CompanieApiController {
             }
 
              // valido los datos
-             if (empty($req->body->nombre) || empty($req->body->fecha) || empty($req->body->modalidad) || 
-             empty($req->body->plataformas) || empty($req->body->id_compania) || empty($req->body->precio)) {
+             if (empty($req->body->nombre) || empty($req->body->fecha) ||  
+             empty($req->body->oficinas) || empty($req->body->sitio_web)) {
              return $this->view->response('Faltan completar datos', 400);
              }
-
              $nombre = $req->body->nombre;       
              $fecha = $req->body->fecha;       
              $oficinas = $req->body->oficinas;
-             $sitioweb = $req->body->sitioweb;   
+             $sitioweb = $req->body->sitio_web;   
 
              $this->companiesModel->updateCompanie($id,$nombre,$fecha,$oficinas,$sitioweb);
 
              $companie = $this->companiesModel->getCompanie($id);
              return $this->view->response($companie,200);
 
+        }
+
+        public function delete($req,$res){
+            if(!$res->user){
+                $this->view->response("no autorizado",401);
+                return;
+            }
+
+            $id = $req->params->id;
+    
+            $companie = $this->companiesModel->getCompanie($id);
+    
+            if (!$companie) {
+                return $this->view->response("la compania con el id=$id no existe", 404);
+            }
+    
+            $this->companiesModel->deleteCompanie($id);
+            $this->view->response("la compania con el id=$id se eliminó con éxito");
         }
 
     }

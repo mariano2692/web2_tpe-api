@@ -6,7 +6,7 @@
 
 
 ## Descripción:
-Tercera entrega del Trabajo Práctico Especial de Web 2 Tudai Grupo 26 Catalogo de juegos. Es un servicio web de tipo RESTFul de una base de datos con su tabla de juegos y companias de dichos juegos. Hay una relacion 1 a N, tanto entre juegos y companias. 
+Tercera entrega del Trabajo Práctico Especial de Web 2 Tudai Grupo 26 Catalogo de juegos. Es un servicio web de tipo restful de una base de datos con su tabla de juegos y companias de dichos juegos. Hay una relacion 1 a N, tanto entre juegos y companias. 
 Al visualizar los datos de los Juegos, se traen también los correspondientes datos del nombre de la compania 
 
 
