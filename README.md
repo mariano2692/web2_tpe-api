@@ -38,7 +38,6 @@ la tabla usuarios tiene:
 
 ## ENDPOINTS
 
-#  Endpoints
   **GET** `<<BaseUrl>>/api/usuarios/token`
 
   **GET** `<<BaseUrl>>/api/juegos`  
