@@ -151,6 +151,13 @@ GET <<BaseUrl>>/api/juegos?filterBy=nombre&filter=league
 
 ---
 
+
+- **PUT** `<<BaseUrl>>/api/juegos/:id`  
+  modifica el juego correspondiente al `id`.
+
+---
+
+
 - **DELETE** `<<BaseUrl>>/api/juegos/:id`  
   Elimina el juego que corresponda al `id`.para poder eliminar un juego, primero tenes que estar identificado por un token de autorizacion
 
